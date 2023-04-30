@@ -1,40 +1,45 @@
 import './App.css';
+import Counter from "./modules/counter";
 
+import Name from "./modules/name";
+import Price from "./modules/price";
+import Description from "./modules/description";
 
-function Input({type, placeholder}){  
-  return (<input type={type} placeholder={placeholder}/>);
-}
+import { Component } from "react"
 
-function Button({value, onClick}){  
-  return (<button onclick={onClick}> {value}  </button>);
-}
-
-function generator(){
-  const symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789()+-.";
-  let password = "";
-  for (let i = 0; i < 12; i++) {
-      password += symbols.charAt(Math.floor(Math.random() * symbols.length));
+class Product extends Component {
+  constructor(props) {
+    super(props);
+    this.name = "bananas";
+    this.price = "1$";
+    this.description = "Fresh bananas from Ecuador";
   }
-  alert(password);
-}
 
-function App() {
+  render() {
+    return (
+      <div>
+        <h3>Products, their prices and descriptions</h3>
+        <table border="1" cellpadding="20px">
+          <tr>
+            <th> Name</th>
+            <th> Price</th>
+            <th> Description</th>
+          </tr>
+          <tr>
+            <td><Name name={this.name} /></td>
+            <td><Price price={this.price} /></td>
+            <td><Description description={this.description} /></td>
+          </tr>
+        </table>
+      </div>
+    )
+  }
+}
+export default function MyApp() {
   return (
-    <div className="Signup">
-      <h4>Sign Up to get more information</h4>
-      <form>
-        <Input type="text" placeholder="Name"/>
-        <Input type="text" placeholder="Last Name"/>
-        <Input type="number" placeholder="age"/>
-        <Input type="email" placeholder="Email"/>
-        <Input type="password" placeholder="Password"/>
-        <Button value="Use password generator" onClick={generator()}/>
-      </form>
+    <div>
+      <Counter />
+      <Product />
     </div>
-  );
+  )
 }
-
-
-
-
-export default App;
